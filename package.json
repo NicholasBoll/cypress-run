@@ -4,7 +4,7 @@
   "description": "Cypress run replacement that supports parallel execution and retries",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cypress:run": "cypress-run"
   },
   "repository": {
     "type": "git",

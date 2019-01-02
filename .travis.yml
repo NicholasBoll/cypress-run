@@ -1,0 +1,40 @@
+language: node_js
+
+node_js:
+  # Node 10.3+ includes npm@6 which has good "npm ci" command
+  - 10.8
+
+cache:
+  # cache both npm modules and Cypress binary
+  directories:
+    - ~/.npm
+    - ~/.cache
+  override:
+    - npm ci
+    - npm run cy:verify
+
+defaults: &defaults
+  script:
+    #   ## print all Travis environment variables for debugging
+    - $(npm bin)/print-env TRAVIS
+    - npm run cypress:run -- --record --parallel --group
+
+jobs:
+  include:
+    # run tests in parallel by including several test jobs with same name variable
+    - stage: test
+      env:
+        - STAGE_NAME=parallel
+      <<: *defaults
+    - stage: test
+      env:
+        - STAGE_NAME=parallel
+      <<: *defaults
+    - stage: test
+      env:
+        - STAGE_NAME=parallel
+      <<: *defaults
+    - stage: test
+      env:
+        - STAGE_NAME=parallel
+      <<: *defaults

@@ -1,9 +1,7 @@
 /// <reference types="Cypress" />
 
 describe('Retries', () => {
-  it('should retry test on the third try', () => {
-
-    const num = Math.round(Math.random() * 10)
+  it('should pass test on the third try', () => {
     expect(Cypress.env().numRuns).to.be.equal(3)
   })
 })
