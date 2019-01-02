@@ -1,0 +1,37 @@
+{
+  "name": "cypress-run",
+  "version": "1.0.0",
+  "description": "Cypress run replacement that supports parallel execution and retries",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NicholasBoll/cypress-run.git"
+  },
+  "bin": {
+    "cypress-run": "./index.js"
+  },
+  "keywords": [
+    "cypress.io",
+    "cypress",
+    "test",
+    "parallel",
+    "retry"
+  ],
+  "author": "Nicholas Boll",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/NicholasBoll/cypress-run/issues"
+  },
+  "homepage": "https://github.com/NicholasBoll/cypress-run#readme",
+  "devDependencies": {
+    "commander": "^2.19.0",
+    "cypress": "^3.1.4"
+  },
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "crypto": "^1.0.1"
+  }
+}
