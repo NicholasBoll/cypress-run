@@ -4,7 +4,8 @@
   "description": "Cypress run replacement that supports parallel execution and retries",
   "main": "index.js",
   "scripts": {
-    "cypress:run": "./index.js"
+    "cypress:run": "./index.js",
+    "cypress:verify": "cypress verify"
   },
   "repository": {
     "type": "git",
