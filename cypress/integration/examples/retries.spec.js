@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
 describe('Retries', () => {
   it('should pass test on the third try', () => {
