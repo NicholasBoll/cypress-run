@@ -45,7 +45,7 @@ jobs:
           at: ~/
       # runs Cypress test in load balancing (parallel) mode
       # and groups them in Cypress Dashboard under name "4x-electron"
-      - run: npm run cypress:run -- --parallel --group $CIRCLE_JOB --record
+      - run: npm run cypress:run -- --parallel --group $CIRCLE_JOB --record --key $CYPRESS_KEY
 
 workflows:
   version: 2
