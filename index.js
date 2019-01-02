@@ -4,27 +4,40 @@ const program = require('commander')
 const cypress = require('cypress')
 const crypto = require('crypto')
 
-const coerceFalse = (arg) => {
+const coerceFalse = arg => {
   return arg !== 'false'
 }
 
-const logErrorExit1 = (err) => {
+const logErrorExit = err => {
   console.log(chalk.red(err.message))
 
   process.exit(1)
 }
 
-const oneLine = (strings) => strings.map(s => s.split('\n').map(l => l.trim()).filter(l => l).join('\n')).join('')
+const oneLine = strings =>
+  strings
+    .map(s =>
+      s
+        .split('\n')
+        .map(l => l.trim())
+        .filter(l => l)
+        .join('\n')
+    )
+    .join('')
 
 const descriptions = {
   record: 'records the run. sends test results, screenshots and videos to your Cypress Dashboard.',
-  key: 'your secret Record Key. you can omit this if you set a CYPRESS_RECORD_KEY environment variable.',
+  key:
+    'your secret Record Key. you can omit this if you set a CYPRESS_RECORD_KEY environment variable.',
   spec: 'runs a specific spec file. defaults to "all"',
-  reporter: 'runs a specific mocha reporter. pass a path to use a custom reporter. defaults to "spec"',
+  reporter:
+    'runs a specific mocha reporter. pass a path to use a custom reporter. defaults to "spec"',
   reporterOptions: 'options for the mocha reporter. defaults to "null"',
   port: 'runs Cypress on a specific port. overrides any value in cypress.json.',
-  env: 'sets environment variables. separate multiple values with a comma. overrides any value in cypress.json or cypress.env.json',
-  config: 'sets configuration values. separate multiple values with a comma. overrides any value in cypress.json.',
+  env:
+    'sets environment variables. separate multiple values with a comma. overrides any value in cypress.json or cypress.env.json',
+  config:
+    'sets configuration values. separate multiple values with a comma. overrides any value in cypress.json.',
   browser: oneLine`
     runs Cypress in the browser with the given name.
     note: using an external browser will not record a video.
@@ -40,12 +53,14 @@ const descriptions = {
   cacheList: 'list the currently cached versions',
   cacheClear: 'delete the Cypress binary cache',
   group: 'a named group for recorded runs in the Cypress dashboard',
-  parallel: 'enables concurrent runs and automatic load balancing of specs across multiple machines or processes',
-  ciBuildId: 'the unique identifier for a run on your CI provider. typically a "BUILD_ID" env var. this value is automatically detected for most CI providers',
+  parallel:
+    'enables concurrent runs and automatic load balancing of specs across multiple machines or processes',
+  ciBuildId:
+    'the unique identifier for a run on your CI provider. typically a "BUILD_ID" env var. this value is automatically detected for most CI providers',
   retries: 'number of times a test will retry before marking as a failure',
 }
 
-const filterArgs = (config) => {
+const filterArgs = config => {
   const inputKeys = Object.keys(descriptions)
   return Object.keys(config).reduce((acc, key) => {
     if (inputKeys.includes(key)) {
@@ -65,7 +80,7 @@ const run = (opts, num = 0, retryGroup = undefined, spec = undefined) => {
   const config = Object.assign({}, opts, {
     env: {
       numRuns: num,
-      ...(opts.env || {})
+      ...(opts.env || {}),
     },
   })
 
@@ -77,8 +92,7 @@ const run = (opts, num = 0, retryGroup = undefined, spec = undefined) => {
     config.group = retryGroup
   }
 
-  return cypress.run(config)
-  .then((results) => {
+  return cypress.run(config).then(results => {
     if (results.totalFailed) {
       totalFailuresIncludingRetries += results.totalFailed
 
@@ -100,7 +114,9 @@ const run = (opts, num = 0, retryGroup = undefined, spec = undefined) => {
       // If we're using parallelization, set a new group name
       let retryGroupName
       if (config.group) {
-        retryGroupName = `${config.group}: retry #${num}  (${specs.length} spec${specs.length===1?'':'s'} on ${uniqueId})`
+        retryGroupName = `${config.group}: retry #${num}  (${specs.length} spec${
+          specs.length === 1 ? '' : 's'
+        } on ${uniqueId})`
       }
 
       // kick off a new suite run
