@@ -8,12 +8,6 @@ const coerceFalse = arg => {
   return arg !== 'false'
 }
 
-const logErrorExit = err => {
-  console.log(chalk.red(err.message))
-
-  process.exit(1)
-}
-
 const oneLine = strings =>
   strings
     .map(s =>
