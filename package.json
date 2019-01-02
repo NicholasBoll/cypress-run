@@ -1,6 +1,6 @@
 {
   "name": "cypress-run",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cypress run replacement that supports parallel execution and retries",
   "main": "index.js",
   "scripts": {
