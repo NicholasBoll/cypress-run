@@ -2,7 +2,6 @@
 
 const program = require('commander')
 const cypress = require('cypress')
-const debug = require('debug')('cypress:cli')
 const crypto = require('crypto')
 
 const coerceFalse = (arg) => {
