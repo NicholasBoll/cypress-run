@@ -19,6 +19,13 @@ const oneLine = strings =>
     )
     .join('')
 
+const processEnv = env =>
+  env.split(',').reduce((acc, pair) => {
+    const [key, value] = pair.split('=')
+    acc[key] = value
+    return acc
+  }, {})
+
 const descriptions = {
   record: 'records the run. sends test results, screenshots and videos to your Cypress Dashboard.',
   key:
@@ -130,7 +137,7 @@ program
   .option('-r, --reporter <reporter>', descriptions.reporter)
   .option('-o, --reporter-options <reporter-options>', descriptions.reporterOptions)
   .option('-p, --port <port>', descriptions.port)
-  .option('-e, --env <env>', descriptions.env)
+  .option('-e, --env <env>', descriptions.env, processEnv)
   .option('-c, --config <config>', descriptions.config)
   .option('-b, --browser <browser-name>', descriptions.browser)
   .option('-P, --project <project-path>', descriptions.project)
