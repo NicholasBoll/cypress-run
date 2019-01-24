@@ -123,6 +123,11 @@ const run = (opts, num = 0, retryGroup = undefined, spec = undefined) => {
       // kick off a new suite run
       return run(opts, num, retryGroupName, specs)
     }
+    if (results.failures) {
+      throw results
+    }
+
+    return results
   })
 }
 
@@ -148,4 +153,4 @@ program
   .option('--dev', descriptions.dev, coerceFalse)
   .parse(process.argv)
 
-run(filterArgs(program))
+run(filterArgs(program)).catch(err => process.exit(1))
