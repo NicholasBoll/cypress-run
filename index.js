@@ -115,9 +115,7 @@ const run = (opts, num = 0, retryGroup = undefined, spec = undefined) => {
       // If we're using parallelization, set a new group name
       let retryGroupName
       if (config.group) {
-        retryGroupName = `${opts.group}: retry #${num} (${specs.length} spec${
-          specs.length === 1 ? '' : 's'
-        } on ${uniqueId})`
+        retryGroupName = `${opts.group}: retry #${num}`
       }
 
       // kick off a new suite run
